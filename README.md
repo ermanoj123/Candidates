@@ -1,7 +1,10 @@
+Candidate Management API
+The Candidate Management API is an ASP.NET Core 8 application for managing candidate information. It supports adding and updating candidate details with built-in validation, logging, and efficient database operations using Entity Framework Core.
+
 Architecture
-
 Directory Structure
-
+plaintext
+Copy code
 ├── Controllers/
 │   ├── CandidatesController.cs
 ├── Services/
@@ -19,85 +22,98 @@ Directory Structure
 ├── Context/
 │   ├── CandidateDbContext.cs
 ├── AppSettings.json
-
 Components
+Controllers
+File: CandidatesController.cs
 
-1. Controllers
-CandidatesController.cs
-Responsible for handling HTTP requests and exposing APIs to interact with the Candidate Management System.
-
-API Endpoint: /api/candidates
-
-Method:
-POST AddOrUpdateCandidate
+Handles HTTP requests and exposes APIs for interacting with the Candidate Management System.
+Endpoint: /api/candidates
 Route: api/candidates/AddOrUpdateCandidate
+Method: POST
 Request Body: CandidatesRequest
-
-Response:
+Responses:
 200 OK: Candidate information saved successfully.
 400 Bad Request: Validation errors in the input model.
 422 Unprocessable Entity: Errors while saving candidate information.
+Services
+File: CandidateService.cs
 
-2. Services
-CandidateService.cs
-Contains the business logic for adding or updating candidate information.
+Contains business logic for managing candidate information.
 Interface: ICandidateService
-
-thods:
-Task<Result<CandidateResponse>> AddOrUpdateCandidateAsync(CandidatesRequest candidateDto)
+Methods:
+Task<Result> AddOrUpdateCandidateAsync(CandidatesRequest candidateDto)
+Adds or updates candidate details.
 bool IsValidEmail(string email)
+Validates email format using regular expressions.
+Repository
+File: CandidateRepository.cs
 
-3. Repository
-CandidateRepository.cs
-Handles database interactions using Entity Framework Core. Implements the ICandidateRepository interface.
+Handles database interactions using Entity Framework Core.
 Interface: ICandidateRepository
 Methods:
-Task<CandidateDto> AddOrUpdateCandidateAsync(CandidateDto candidateDto)
-
-4. Models
-CandidatesRequest.cs
-Defines the structure for candidate data received in the API request.
-CandidateResponse.cs
-Represents the response structure returned by the service layer.
-
-CandidateDto.cs
-Defines the structure for the candidate data persisted in the database.
+Task AddOrUpdateCandidateAsync(CandidateDto candidateDto)
+Adds or updates a candidate in the database.
+Models
+CandidatesRequest.cs: Structure for candidate data in API requests.
+CandidateResponse.cs: Structure for service-layer responses.
+CandidateDto.cs: Represents database-stored candidate data.
 Flow of Execution
+API Request Handling
 
-1. API Request Handling
-The CandidatesController receives an API request with candidate details. The request body is validated, and if valid, the controller calls the CandidateService.
+CandidatesController receives and validates an API request.
+Calls CandidateService for business logic processing.
+Business Logic
 
-2. Business Logic
-The CandidateService processes the input data, validates the email format, and constructs a CandidateDto object. It then calls the CandidateRepository for database operations.
+CandidateService validates email format and constructs a CandidateDto object.
+Calls CandidateRepository for database operations.
+Database Operations
 
-3. Database Operations
-The CandidateRepository checks if a candidate with the provided email exists:
-If Exists: Updates the existing record.
-If Not: Adds a new candidate record.
-The changes are saved to the database.
+CandidateRepository checks for existing candidates by email:
+If exists: Updates the record.
+If not: Adds a new record.
+Saves changes to the database.
+Logging
 
-4. Logging
-Serilog captures and logs important events, such as invalid email formats, successful updates, or errors during processing.
+Serilog captures key events such as:
+Invalid email formats.
+Successful updates or additions.
+Errors during processing.
+API Response
 
-5. API Response
-The service returns a result to the controller, which in turn sends the appropriate HTTP response back to the client.
-
+The service returns a result to the controller.
+Controller sends the appropriate HTTP response.
 Key Features
-Validation:
-Ensures valid email format using regular expressions.
-
-Upsert Logic:
-Handles both adding new candidates and updating existing ones.
-
-Logging:
-Tracks key events and errors using Serilog.
-
+Validation: Validates email format using regular expressions.
+Upsert Logic: Efficiently adds or updates candidate data.
+Logging: Tracks events and errors using Serilog.
 Logging and Monitoring
 Serilog Configuration:
 Logs are written to both the console and a file.
-Monitors key application events and exceptions.
-
+Monitors application events and exceptions.
 Future Enhancements
-Pagination: Add support for paginated retrieval of candidate data.
+Pagination: Support paginated retrieval of candidate data.
 Authentication: Secure APIs using JWT-based authentication.
-Search Filters: Enable filtering candidates by name, email, or date range
+Search Filters: Enable filtering candidates by name, email, or date range.
+Getting Started
+Prerequisites
+ASP.NET Core 8
+Entity Framework Core 8
+SQL Server
+Setup Instructions
+Clone the repository:
+bash
+Copy code
+git clone https://github.com/your-username/candidate-management-api.git
+Navigate to the project directory:
+bash
+Copy code
+cd candidate-management-api
+Configure the appsettings.json file with your database and logging settings.
+Apply migrations to set up the database:
+bash
+Copy code
+dotnet ef database update
+Run the project:
+bash
+Copy code
+dotnet run
