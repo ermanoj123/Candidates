@@ -140,7 +140,7 @@ Setup Instructions
 
 Clone the repository:
 
-git clone https://github.com/your-username/candidate-management-api.git
+git clone https://github.com/ermanoj123/Candidates/tree/main/Candidate
 
 Navigate to the project directory:
 
