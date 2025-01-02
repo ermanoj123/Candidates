@@ -75,45 +75,73 @@ Saves changes to the database.
 Logging
 
 Serilog captures key events such as:
-Invalid email formats.
-Successful updates or additions.
-Errors during processing.
-API Response
 
+Invalid email formats.
+
+Successful updates or additions.
+
+Errors during processing.
+
+API Response
 The service returns a result to the controller.
+
 Controller sends the appropriate HTTP response.
+
 Key Features
 Validation: Validates email format using regular expressions.
+
 Upsert Logic: Efficiently adds or updates candidate data.
+
 Logging: Tracks events and errors using Serilog.
+
 Logging and Monitoring
 Serilog Configuration:
 Logs are written to both the console and a file.
 Monitors application events and exceptions.
+
 Future Enhancements
 Pagination: Support paginated retrieval of candidate data.
 Authentication: Secure APIs using JWT-based authentication.
 Search Filters: Enable filtering candidates by name, email, or date range.
+
 Getting Started
 Prerequisites
 ASP.NET Core 8
+
 Entity Framework Core 8
+
 SQL Server
 Setup Instructions
+
 Clone the repository:
+
 bash
+
 Copy code
+
 git clone https://github.com/your-username/candidate-management-api.git
 Navigate to the project directory:
+
 bash
+
 Copy code
+
 cd candidate-management-api
+
 Configure the appsettings.json file with your database and logging settings.
+
 Apply migrations to set up the database:
+
 bash
+
 Copy code
+
 dotnet ef database update
+
 Run the project:
+
 bash
+
 Copy code
+
 dotnet run
