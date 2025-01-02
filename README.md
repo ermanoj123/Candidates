@@ -1,29 +1,10 @@
 Candidate Management API
 The Candidate Management API is an ASP.NET Core 8 application for managing candidate information. It supports adding and updating candidate details with built-in validation, logging, and efficient database operations using Entity Framework Core.
 
-Architecture
 Directory Structure
-plaintext
-Copy code
-├── Controllers/
-│   ├── CandidatesController.cs
-├── Services/
-│   ├── CandidateService.cs
-│   ├── ICandidateService.cs
-├── Repository/
-│   ├── CandidateRepository.cs
-│   ├── ICandidateRepository.cs
-├── Models/
-│   ├── CandidatesRequest.cs
-│   ├── CandidateResponse.cs
-│   ├── CandidateDto.cs
-├── Entities/
-│   ├── CandidateDto.cs
-├── Context/
-│   ├── CandidateDbContext.cs
-├── AppSettings.json
-Components
+
 Controllers
+
 File: CandidatesController.cs
 
 Handles HTTP requests and exposes APIs for interacting with the Candidate Management System.
