@@ -8,9 +8,11 @@ namespace Candidate.Repository
     public class CandidateRepository : ICandidateRepository
     {
         private readonly CandidateDbContext _dbContext;
-        public CandidateRepository(CandidateDbContext dbContext)
+        private readonly ILogger<CandidateService> _logger;
+        public CandidateRepository(CandidateDbContext dbContext, ILogger<CandidateService> logger)
         {
             _dbContext = dbContext;
+            _logger = logger;
         }
 
         public async Task<CandidateDto> AddOrUpdateCandidateAsync(CandidateDto candidateDto)
@@ -31,10 +33,12 @@ namespace Candidate.Repository
                 existingCandidate.UpdatedDate = candidateDto.CreatedDate;
 
                 _dbContext.CandidateDtos.Update(existingCandidate);
+                _logger.LogInformation("Candidate updated successfully: {@candidateDto}", candidateDto);
             }
             else
             {
-                 await _dbContext.CandidateDtos.AddAsync(candidateDto);
+                await _dbContext.CandidateDtos.AddAsync(candidateDto);
+                _logger.LogInformation("Candidate created successfully: {@candidateDto}", candidateDto);
             }
             await _dbContext.SaveChangesAsync();
             return candidateDto;
