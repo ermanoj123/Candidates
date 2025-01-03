@@ -10,27 +10,20 @@ namespace Candidate.Entities
         [Required]
         [StringLength(50)]
         public string FirstName { get; set; } = null!;
-
         [Required]
         [StringLength(50)]
         public string LastName { get; set; } = null!;
-
-        [Phone]
-        [StringLength(15)]
-        public string PhoneNumber { get; set; } = null!;
-
+        public int? PhoneNumber { get; set; }
         [Required]
         [EmailAddress]
         [StringLength(100)]
         public string Email { get; set; } = null!;
-
         [StringLength(20)]
-        public string PreferredCallTime { get; set; } = null!;
+        public string? PreferredCallTime { get; set; }
         [StringLength(200)]
         public string? LinkedInProfileUrl { get; set; }
         [StringLength(200)]
         public string? GitHubProfileUrl { get; set; }
-
         [Required]
         [StringLength(500)]
         public string FreeTextComment { get; set; } = null!;

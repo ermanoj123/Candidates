@@ -38,7 +38,6 @@ namespace Candidate.Services
             var candidateResponse = await _candidateRepository.AddOrUpdateCandidateAsync(candidate);
             if (candidateResponse != null)
             {
-                _logger.LogInformation("Candidate upserted successfully: {@candidateResponse}", candidateResponse);
                 response.IsSuccess = true;
                 return response;
             }

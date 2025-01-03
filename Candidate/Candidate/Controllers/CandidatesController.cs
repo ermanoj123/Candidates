@@ -19,10 +19,6 @@ namespace Candidate.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> AddOrUpdateCandidate([FromBody] CandidatesRequest candidateDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
             var data = await _candidateService.AddOrUpdateCandidateAsync(candidateDto);
             return data.IsSuccess ? Ok("Candidate information saved successfully.") : Problem(data.Errors[0].Message, statusCode: StatusCodes.Status422UnprocessableEntity);
         }

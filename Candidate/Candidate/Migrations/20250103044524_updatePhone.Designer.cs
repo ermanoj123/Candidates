@@ -4,6 +4,7 @@ using Candidate.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Candidate.Migrations
 {
     [DbContext(typeof(CandidateDbContext))]
-    partial class CandidateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250103044524_updatePhone")]
+    partial class updatePhone
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,6 +68,7 @@ namespace Candidate.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<int?>("PhoneNumber")
+                        .HasMaxLength(15)
                         .HasColumnType("int");
 
                     b.Property<string>("PreferredCallTime")
